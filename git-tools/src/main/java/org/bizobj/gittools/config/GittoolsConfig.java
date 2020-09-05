@@ -1,13 +1,12 @@
-package net.thinkbase.dev.gittools.config;
+package org.bizobj.gittools.config;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import org.bizobj.gittools.GittoolsApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import net.thinkbase.dev.gittools.GittoolsApplication;
 
 @Component
 public class GittoolsConfig {

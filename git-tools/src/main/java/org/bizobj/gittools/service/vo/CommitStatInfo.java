@@ -1,4 +1,4 @@
-package net.thinkbase.dev.gittools.service.vo;
+package org.bizobj.gittools.service.vo;
 
 import java.util.ArrayList;
 import java.util.Date;

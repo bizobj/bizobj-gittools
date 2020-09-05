@@ -1,4 +1,4 @@
-package net.thinkbase.dev.gittools.service.utils;
+package org.bizobj.gittools.service.utils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.bizobj.gittools.service.vo.CommitStatInfo;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.diff.DiffEntry;
@@ -24,8 +25,6 @@ import org.eclipse.jgit.treewalk.EmptyTreeIterator;
 import org.eclipse.jgit.util.io.DisabledOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.thinkbase.dev.gittools.service.vo.CommitStatInfo;
 
 public class GitUtils {
 	private static final Logger logger =  LoggerFactory.getLogger(GitUtils.class);

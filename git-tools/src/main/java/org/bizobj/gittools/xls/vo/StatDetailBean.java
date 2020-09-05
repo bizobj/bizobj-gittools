@@ -1,15 +1,14 @@
-package net.thinkbase.dev.gittools.xls.vo;
+package org.bizobj.gittools.xls.vo;
 
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bizobj.gittools.service.vo.CommitStatInfo;
 
 import com.github.liaochong.myexcel.core.annotation.ExcelColumn;
 import com.github.liaochong.myexcel.core.annotation.ExcelModel;
-
-import net.thinkbase.dev.gittools.service.vo.CommitStatInfo;
 
 @ExcelModel(sheetName = StatDetailBean.SHEET_NAME,
             style={"title->font-size:10px;font-weight:bold;text-align:center;vertical-align:center;background-color:#F0F8FF;",

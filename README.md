@@ -16,7 +16,26 @@ BizObj GitTools
 - `Settings` - 设置
   - 用于设置运行参数。
 
+
+
 ## 扩展
 
-系统包括多个扩展的统计字段（例如 组织、产品线、模块、任务号等），可以使用 Groovy 脚本进行扩展，具体参考 `git-tool-test-groovy/src/main/groovy/example.groovy` 文件.
+系统包括多个扩展的统计字段（例如 组织、产品线、模块、任务号等），可以使用 Groovy 脚本进行扩展，具体参考 [git-tool-test-groovy/src/main/groovy/example.groovy](./git-tool-test-groovy/src/main/groovy/example.groovy) 文件.
 
+
+
+## Screens
+
+### Settings
+
+![image-20200906014321374](assets/image-20200906014321374.png)
+
+### 导出的文件
+
+![image-20200906014432839](assets/image-20200906014432839.png)
+
+透视表及图表
+
+![image-20200906014519172](assets/image-20200906014519172.png)
+
+![image-20200906014558786](assets/image-20200906014558786.png)

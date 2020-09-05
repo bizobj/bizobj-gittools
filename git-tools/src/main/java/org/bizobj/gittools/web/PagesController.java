@@ -1,10 +1,11 @@
-package net.thinkbase.dev.gittools.web;
+package org.bizobj.gittools.web;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 
 import org.apache.commons.codec.CharEncoding;
+import org.bizobj.gittools.config.GittoolsConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import net.thinkbase.dev.gittools.config.GittoolsConfig;
 import reactor.core.publisher.Mono;
 
 @Controller

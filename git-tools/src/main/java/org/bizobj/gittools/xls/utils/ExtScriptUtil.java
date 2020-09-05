@@ -1,15 +1,15 @@
-package net.thinkbase.dev.gittools.xls.utils;
+package org.bizobj.gittools.xls.utils;
 
 import java.io.File;
 import java.io.IOException;
 
+import org.bizobj.gittools.service.vo.CommitStatInfo;
+import org.bizobj.gittools.xls.vo.StatDetailBean;
 import org.codehaus.groovy.control.CompilationFailedException;
 
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyCodeSource;
 import groovy.lang.GroovyObject;
-import net.thinkbase.dev.gittools.service.vo.CommitStatInfo;
-import net.thinkbase.dev.gittools.xls.vo.StatDetailBean;
 
 public class ExtScriptUtil {
 	/** The class name of extension groovy class */

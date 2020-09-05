@@ -1,7 +1,7 @@
 import org.apache.commons.lang3.time.DateFormatUtils
 
-import net.thinkbase.dev.gittools.service.vo.CommitStatInfo
-import net.thinkbase.dev.gittools.xls.vo.StatDetailBean
+import org.bizobj.gittools.service.vo.CommitStatInfo
+import org.bizobj.gittools.xls.vo.StatDetailBean
 
 /**
  * exValidation;    //有效性
