@@ -1,1 +1,0 @@
-The .research directory contains some research/study/test code.
