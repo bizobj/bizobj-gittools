@@ -27,9 +27,10 @@ public class StatDetailBean {
 	private Date time;
 	@ExcelColumn(title = "作者", width = 6)
 	private String author;
-	@ExcelColumn(title = "提交人", width = 6)
-	private String committer;
-	
+
+	@ExcelColumn(title = "工作量", width = 6)
+	private int workLoad;
+
 	@ExcelColumn(title = "文件数", width = 4)
 	private int files;
 	@ExcelColumn(title = "新增行数", width = 4)
@@ -66,6 +67,8 @@ public class StatDetailBean {
 	@ExcelColumn(title = "提交文件", width = 32)
 	private String diffs;
 	
+	@ExcelColumn(title = "提交人", width = 6)
+	private String committer;
 	@ExcelColumn(title = "合并来源", width = 8)
 	private String mergeParents;
 
@@ -129,6 +132,12 @@ public class StatDetailBean {
 	public void setDiffs(String diffs) {
 		this.diffs = diffs;
 	}
+	public int getWorkLoad() {
+		return workLoad;
+	}
+	public void setWorkLoad(int exWorkLoad) {
+		this.workLoad = exWorkLoad;
+	}
 	public int getFiles() {
 		return files;
 	}
@@ -181,6 +190,9 @@ public class StatDetailBean {
 		bean.setFiles(ci.getFiles());
 		bean.setLinesAdded(ci.getLinesAdded());
 		bean.setLinesDeleted(ci.getLinesDeleted());
+		
+		//NOTE - 此处简单使用修改行数作为工作量, 建议根据实际情况在扩展 Groovy 脚本中调整
+		bean.setWorkLoad(ci.getLinesAdded()+ci.getLinesDeleted());
 		
 		List<String> parents = ci.getParents();
 		if (parents.size()>1) {
