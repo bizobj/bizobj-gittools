@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.bizobj.gittools.service.vo.CommitStatInfo;
 import org.bizobj.gittools.xls.vo.StatDetailBean;
 import org.codehaus.groovy.control.CompilationFailedException;
+import org.codehaus.groovy.control.CompilerConfiguration;
 
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyCodeSource;
@@ -16,14 +17,18 @@ public class ExtScriptUtil {
 	private static final String GIT_TOOLS_EXT_METHOD = "run"; 
 	
 	/**
-	 * Build groovy instance with {@link #GIT_TOOLS_EXT_METHOD} function defined
+	 * Build groovy class instance with {@link #GIT_TOOLS_EXT_METHOD} function defined
 	 * @param groovySrc
 	 * @return
 	 */
 	public static GroovyObject buildExtInstance(File groovySrc) {
 		try {
-			GroovyClassLoader classLoader = new GroovyClassLoader(Thread.currentThread().getContextClassLoader());  
-			Class<?> groovyClass = classLoader.parseClass(new GroovyCodeSource(groovySrc, "utf-8"));  
+            //FIXME CompilerConfiguration.DEFAULT use file.encoding overwrite CompilerConfiguration.DEFAULT_SOURCE_ENCODING(UTF-8)
+            CompilerConfiguration cfg = new CompilerConfiguration();
+            cfg.setSourceEncoding("UTF-8");
+           
+            GroovyClassLoader classLoader = new GroovyClassLoader(Thread.currentThread().getContextClassLoader(), cfg);  
+            Class<?> groovyClass = classLoader.parseClass(new GroovyCodeSource(groovySrc, "UTF-8"));  
 			GroovyObject instance = (GroovyObject)groovyClass.getDeclaredConstructor().newInstance();
 			return instance;
 		} catch (CompilationFailedException | ReflectiveOperationException | SecurityException | IOException e) {
@@ -32,8 +37,8 @@ public class ExtScriptUtil {
 	}
 	
 	/**
-	 * Call "run" function with {@link CommitStatInfo} and {@link StatDetailBean}, so extension fields in {@link StatDetailBean}
-	 * could be filled by groovy script
+     * Call  {@link #GIT_TOOLS_EXT_METHOD} function with {@link CommitStatInfo} and {@link StatDetailBean},
+     * to customize the extension fields in {@link StatDetailBean}.
 	 * @param instance
 	 * @param ci
 	 * @param si

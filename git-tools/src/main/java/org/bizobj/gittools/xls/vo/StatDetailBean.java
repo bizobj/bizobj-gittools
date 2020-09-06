@@ -36,7 +36,31 @@ public class StatDetailBean {
 	private int linesAdded;
 	@ExcelColumn(title = "删除行数", width = 4)
 	private int linesDeleted;
-	
+
+	@ExcelColumn(title = "组织", width = 6)
+	private String exOrganization;
+
+	@ExcelColumn(title = "团队", width = 6)
+	private String exTeam;
+
+	@ExcelColumn(title = "组长", width = 6)
+	private String exTeamLeader;
+
+	@ExcelColumn(title = "产品", width = 8)
+	private String exProductLine;
+
+	@ExcelColumn(title = "组件", width = 8)
+	private String exComponent;
+
+	@ExcelColumn(title = "阶段", width = 8)
+	private String exStage;
+
+	@ExcelColumn(title = "任务", width = 6)
+	private String exTask;
+
+	@ExcelColumn(title = "时段", width = 6)
+	private String exPeriod;
+
 	@ExcelColumn(title = "备注", width = 30)
 	private String comment;
 	@ExcelColumn(title = "提交文件", width = 32)
@@ -47,32 +71,14 @@ public class StatDetailBean {
 
 	@ExcelColumn(title = "有效性", width = 4)
 	private String exValidation;
-
-	@ExcelColumn(title = "组织", width = 6)
-	private String exOrganization;
-
-	@ExcelColumn(title = "团队", width = 6)
-	private String exTeam;
-
-	@ExcelColumn(title = "产品", width = 6)
-	private String exProductLine;
-
-	@ExcelColumn(title = "组件", width = 6)
-	private String exComponent;
-
-	@ExcelColumn(title = "阶段", width = 6)
-	private String exStage;
-
-	@ExcelColumn(title = "任务", width = 6)
-	private String exTask;
-
-	@ExcelColumn(title = "属性1", width = 6)
+	
+	@ExcelColumn(title = "属性1", width = 8)
 	private String exAttribute1;
 
-	@ExcelColumn(title = "属性2", width = 6)
+	@ExcelColumn(title = "属性2", width = 8)
 	private String exAttribute2;
 
-	@ExcelColumn(title = "属性3", width = 6)
+	@ExcelColumn(title = "属性3", width = 8)
 	private String exAttribute3;
 
 	public String getRepo() {
@@ -202,6 +208,12 @@ public class StatDetailBean {
 	public void setExTeam(String exTeam) {
 		this.exTeam = exTeam;
 	}
+	public String getExTeamLeader() {
+		return exTeamLeader;
+	}
+	public void setExTeamLeader(String exTeamLeader) {
+		this.exTeamLeader = exTeamLeader;
+	}
 	public String getExProductLine() {
 		return exProductLine;
 	}
@@ -225,6 +237,12 @@ public class StatDetailBean {
 	}
 	public void setExTask(String exTask) {
 		this.exTask = exTask;
+	}
+	public String getExPeriod() {
+		return exPeriod;
+	}
+	public void setExPeriod(String exPeriod) {
+		this.exPeriod = exPeriod;
 	}
 	public String getExAttribute1() {
 		return exAttribute1;

@@ -4,16 +4,17 @@ import org.bizobj.gittools.service.vo.CommitStatInfo
 import org.bizobj.gittools.xls.vo.StatDetailBean
 
 /**
- * exValidation;    //有效性
  * exOrganization;  //组织
  * exTeam;          //团队
+ * exTeamLeader;    //组长
  * exProductLine;   //产品
  * exComponent;     //组件
  * exStage;         //阶段
  * exTask;          //任务
- * exAttribute1;    //分类1
- * exAttribute2;    //分类2
- * exAttribute3;    //分类3
+ * exValidation;    //有效性
+ * exAttribute1;    //属性1
+ * exAttribute2;    //属性2
+ * exAttribute3;    //属性3
  * 
  * git clone https://github.com/vuejs/cn.vuejs.org.git
  * git clone https://github.com/bailicangdu/vue2-manage.git
@@ -23,9 +24,6 @@ import org.bizobj.gittools.xls.vo.StatDetailBean
 class GitToolsEx {
 
 	def run(CommitStatInfo ci, StatDetailBean si) {
-		if (ci.parents.size()>1) {
-			si.exValidation = "N";
-		}
 		
 		if (ci.repo ==~ /.*vue.*/) {
 			si.exOrganization = "vuejs";
@@ -37,6 +35,7 @@ class GitToolsEx {
 		
 		if (ci.repo == "cn.vuejs.org") {
 			si.exTeam = "中文";
+			si.exTeamLeader = "张三";
 		}
 		
 		if (ci.repo ==~ /.*vue.*/) {
@@ -55,12 +54,16 @@ class GitToolsEx {
 			si.exComponent = "Cache";
 		}
 		
-		def _y = DateFormatUtils.format(ci.getTime(), "yyyy");
-		def _Q = QuarterTable.get(DateFormatUtils.format(ci.getTime(), "MM"));
-		si.exStage = "${_y}-${_Q}";
+		si.exStage = getStage(ci.getTime());
 		
 		si.exTask = resolverTask(ci.comment);
 		
+		si.exPeriod = getPeriod(ci.time);
+		
+		if (ci.parents.size()>1) {
+			si.exValidation = "N";
+		}
+
 		if (ci.comment.startsWith("Merge")) {
 			si.exAttribute1 = "Merge";
 		}else if (ci.comment.startsWith("Fix")) {
@@ -79,6 +82,7 @@ class GitToolsEx {
 			si.author = realName;
 			si.exAttribute3 = ci.author;	//备份被规范化修改的作者名称
 		}
+		
 	}
 
 	def resolverTask(str){
@@ -106,16 +110,43 @@ class GitToolsEx {
 		return "";
 	}
 
-	/**
-	 * 月份与季度的对应关系
-	 */
-	static def QuarterTable = [
-		"01": "Q1", "02": "Q1", "03": "Q1",
-		"04": "Q2", "05": "Q2", "06": "Q2",
-		"07": "Q3", "08": "Q3", "09": "Q3",
-		"10": "Q4", "11": "Q4", "12": "Q4",
-	];
+    def getStage(Date commitTime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(commitTime);
+
+        //获得当前日期属于今年的第几周
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);//周一作为一周的开始
+        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+
+        //获得指定年度第几周的开始日期/结束日期
+        int weekYear = calendar.get(Calendar.YEAR);//获得当前的年
+        calendar.setWeekDate(weekYear, weekOfYear, Calendar.MONDAY);//周一作为一周的开始
+        def startTime = calendar.getTime();
+        calendar.setWeekDate(weekYear, weekOfYear, Calendar.SUNDAY);//周日作为一周的结束
+        def endTime = calendar.getTime();
+
+        def _year = DateFormatUtils.format(commitTime, "yyyy");
+        def _week = (weekOfYear<10)?"0"+weekOfYear:""+weekOfYear;
+        def _firstDate = DateFormatUtils.format(startTime, "MMdd");
+        def _lastDate = DateFormatUtils.format(endTime, "MMdd");
+
+        return "${_year}W${_week}(${_firstDate}-${_lastDate})";
+    }
 	
+	def getPeriod(Date commitTime) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(commitTime);
+		def dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		if (Calendar.SATURDAY==dayOfWeek || Calendar.SUNDAY==dayOfWeek) {
+			return "周末";
+		}
+		def hour = calendar.get(Calendar.HOUR_OF_DAY);
+		if (hour < 8 || hour > 18) {
+			return "加班";
+		}
+		return "正常";
+	}
+		
 	/**
 	 * 作者的真名对应关系
 	 */
