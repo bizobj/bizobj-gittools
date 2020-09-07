@@ -1,4 +1,4 @@
-package net.thinkbase.dev.gittools;
+package org.bizobj.gittools;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
